@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Calculadora de médias</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <main class="calculadora">
+
+            <form id="dados_Aluno">
+                <select name="Instituição de ensino" id="IES">
+                    <option value="grad">UAM - GRAD</option>
+                    <option value="pos">UAM - PÓS</option>
+                    <option value="grad">FMU - GRAD</option>
+                    <option value="pos">FMU - PÓS</option>
+                </select>
+    
+                <input type="text" name="Nome da disciplina" id="disciplina_nome" placeholder="nome da disciplina">
+    
+                <input type="number" max="10" min="0" id="atividade1" placeholder="Atividade 1" class="atividades">
+    
+                <input type="number" max="10" min="0"  id="atividade2" placeholder="Atividade 2" class="atividades">
+                
+                <input type="number" max="10" min="0"  id="atividade3" placeholder="Atividade 3" class="atividades">
+    
+                <input type="number" max="10" min="0"  id="atividade4" placeholder="Atividade 4" class="atividades">
+    
+                <input type="number" max="10" min="0" id="N2" placeholder="Prova N2" class="atividades">
+
+                <div class="btns">
+                    <button id="cadastrar" type="button">Cadastrar</button>
+                    <button id="result_btn" type="button">Resultado</button>
+                </div>
+            </form>
+            
+            <table id="result">
+
+            </table>
+        </main>
+
+
+        <script src="js/uam_fmu.js" async defer></script>
+    </body>
+</html>
