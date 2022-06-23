@@ -12,8 +12,11 @@ let atv4_input = document.querySelector("#atividade4");
 
 let N2_input = document.querySelector("#N2");
 
+const tabela = document.querySelector("#result");
+
 const cadastro_btn = document.querySelector("#cadastrar");
 const result_btn = document.querySelector("#result_btn");
+const reset_btn = document.getElementById("clean");
 
 let Disciplinas = [];
 let atv1 = [];
@@ -23,72 +26,84 @@ let atv4 = [];
 let N2 = [];
 
 function initCad() {
-  Disciplinas.push(disciplina.value);
-
   let atv1_value = Number(atv1_input.value);
   let atv2_value = Number(atv2_input.value);
   let atv3_value = Number(atv3_input.value);
   let atv4_value = Number(atv4_input.value);
   let N2_value = Number(N2_input.value);
+  if (
+    atv1_value > 10 ||
+    atv2_value > 10 ||
+    atv3_value > 10 ||
+    atv4_value > 10 ||
+    N2_value > 10
+  ) {
+    alert(
+      "O Valor deve ser menor ou igual a 10, caso sua nota seja 100 coloque 10."
+    );
+  } else {
+    Disciplinas.push(disciplina.value);
+    atv1.push(atv1_value);
+    atv2.push(atv2_value);
+    atv3.push(atv3_value);
+    atv4.push(atv4_value);
+    N2.push(N2_value);
+  }
 
-  atv1.push(atv1_value);
-  atv2.push(atv2_value);
-  atv3.push(atv3_value);
-  atv4.push(atv4_value);
-  N2.push(N2_value)
-
-  disciplina.value = ''
-  atv1_input.value = ''
-  atv2_input.value = ''
-  atv3_input.value = ''
-  atv4_input.value = ''
-  N2_input.value = ''
+  disciplina.value = "";
+  atv1_input.value = "";
+  atv2_input.value = "";
+  atv3_input.value = "";
+  atv4_input.value = "";
+  N2_input.value = "";
 }
 
 /* media */
 function calculo_media_final(nota1, nota2, nota3, nota4, prova) {
-  let IES = IES_input.value
-  let N1 = (nota1 + nota2 +nota3 + nota4) / 4;
+  let IES = IES_input.value;
+  let N1 = (nota1 + nota2 + nota3 + nota4) / 4;
 
   if (IES == "grad") {
     let media_Final = N1 * 0.4 + prova * 0.6;
-    return media_Final
+    return media_Final.toFixed(1);
   } else if (IES == "pos") {
     let media_Final = N1 * 0.6 + prova * 0.4;
-    return media_Final.toFixed(1)
+    return media_Final.toFixed(1);
   }
 }
 
 function media_N1(nota1, nota2, nota3, nota4) {
-    return N1 = ((nota1 + nota2 +nota3 + nota4) / 4).toFixed(1);
-
+  return (N1 = ((nota1 + nota2 + nota3 + nota4) / 4).toFixed(1));
 }
-
 
 /*fim media*/
 
 function getRowContent(i) {
-    function concept() {
-        if (calculo_media_final(atv1[i], atv2[i], atv3[i], atv4[i], N2[i]) >= 6) {
-          return `<p class="aprovado">APROVADO</p>`;
-        } else {
-          return `<p class="reprovado">REPROVADO</p>`;
-        }
-      }
+  function concept() {
+    if (calculo_media_final(atv1[i], atv2[i], atv3[i], atv4[i], N2[i]) >= 6) {
+      return `<p class="aprovado">APROVADO</p>`;
+    } else {
+      return `<p class="reprovado">REPROVADO</p>`;
+    }
+  }
 
   return `
       <tr>
         <td>${Disciplinas[i]}</td>
         <td>${media_N1(atv1[i], atv2[i], atv3[i], atv4[i])}</td>
-        <td>${calculo_media_final(atv1[i], atv2[i], atv3[i], atv4[i], N2[i])}</td>
+        <td>${calculo_media_final(
+          atv1[i],
+          atv2[i],
+          atv3[i],
+          atv4[i],
+          N2[i]
+        )}</td>
         <td>${concept()}</td>
       </tr>
 `;
 }
 
 function initShow() {
-  const tabela = document.querySelector("#result");
-
   tabela.innerHTML = "";
 
   const head1 = document.createElement("th");
@@ -110,5 +125,17 @@ function initShow() {
   }
 }
 
+function reset() {
+  Disciplinas = [];
+  atv1 = [];
+  atv2 = [];
+  atv3 = [];
+  atv4 = [];
+  N2 = [];
+
+  tabela.innerHTML = "";
+}
+
 cadastro_btn.addEventListener("click", initCad);
 result_btn.addEventListener("click", initShow);
+reset_btn.addEventListener("click", reset);
